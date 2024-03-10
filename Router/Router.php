@@ -4,13 +4,13 @@ namespace Router;
 
 use FastRoute;
 use DI\ContainerBuilder;
-use App\Controllers\RenderController;
 use App\Controllers\UserController;
 use App\Services\Config;
 use PDO;
 use League\Plates\Engine;
 use Delight\Auth\Auth;
-
+use Aura\SqlQuery\QueryFactory;
+use Tamtamchik\SimpleFlash\Flash;
 
 Class Router 
 {
@@ -19,45 +19,39 @@ Class Router
     public static function getRouter(): void
     {
         self::$dispatcher = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
-            $r->addRoute('GET', '/users', [RenderController::class, 'getPage', ['users']]);
+            $r->addRoute('GET', '/users', [UserController::class, 'getPageUsers']);
 
-            $r->addRoute('GET', '/login', [RenderController::class, 'getPage', ['page_login']]);
+            $r->addRoute('GET', '/login', [UserController::class, 'getPageLogin']);
             $r->addRoute('POST', '/login', [UserController::class, 'login']);
 
             $r->addRoute('GET', '/logout', [UserController::class, 'logOut']);
 
-            $r->addRoute('GET', '/register', [RenderController::class, 'getPage', ['page_register']]);
+            $r->addRoute('GET', '/register', [UserController::class, 'getPageRegister']);
             $r->addRoute('POST', '/register', [UserController::class, 'register']);
 
-            $r->addRoute('GET', '/create_user', [RenderController::class, 'getPage', ['create_user']]);
+            $r->addRoute('GET', '/create_user', [UserController::class, 'getPageCreateUser']);
             $r->addRoute('POST', '/create_user', [UserController::class, 'createUser']);
 
-            $r->addRoute('GET', '/profile/{id:\d+}', [RenderController::class, 'getPage', ['page_profile']]);
+            // другой контроллер, так как данные для страницы берутся из id в uri
+            $r->addRoute('GET', '/profile/{id:\d+}', [UserController::class, 'getPageProfile']);
+            $r->addRoute('GET', '/delete-user/{id:\d+}', [UserController::class, 'deleteUser']);
 
-            $r->addRoute('GET', '/edit/{id:\d+}[/{page}]', [RenderController::class, 'getPage']);
+            $r->addRoute('GET', '/edit/{id:\d+}', [UserController::class, 'getPageEdit']);
             $r->addRoute('POST', '/edit/{id:\d+}', [UserController::class, 'editUser']);
 
-            $r->addRoute('GET', '/image/{id:\d+}', [RenderController::class, 'getPage', ['image']]);
+            $r->addRoute('GET', '/image/{id:\d+}', [UserController::class, 'getPageImage']);
             $r->addRoute('POST', '/image/{id:\d+}', [UserController::class, 'imageUser']);
 
-            $r->addRoute('GET', '/status/{id:\d+}', [RenderController::class, 'getPage', ['status']]);
+            $r->addRoute('GET', '/status/{id:\d+}', [UserController::class, 'getPageStatus']);
             $r->addRoute('POST', '/status/{id:\d+}', [UserController::class, 'statusUser']);
 
-            $r->addRoute('GET', '/security/{id:\d+}', [RenderController::class, 'getPage', ['security']]);
+            $r->addRoute('GET', '/security/{id:\d+}', [UserController::class, 'getPageSecurity']);
             $r->addRoute('POST', '/security/{id:\d+}', [UserController::class, 'securityUser']);
-            /*
-            // {id} must be a number (\d+)
-            $r->addRoute('GET', '/user/{id:\d+}', 'get_user_handler');
-            // The /{title} suffix is optional
-            $r->addRoute('GET', '/articles/{id:\d+}[/{title}]', 'get_article_handler');
-            */
         });
-        
-        // Fetch method and URI from somewhere
+
         $httpMethod = $_SERVER['REQUEST_METHOD'];
         $uri = $_SERVER['REQUEST_URI'];
-        
-        // Strip query string (?foo=bar) and decode URI
+
         if (false !== $pos = strpos($uri, '?')) {
             $uri = substr($uri, 0, $pos);
         }
@@ -76,10 +70,15 @@ Class Router
                 Auth::class => function($container) {
                     return new Auth($container->get('PDO'));
                 },
+                QueryFactory::class => function() {
+                    return new QueryFactory('mysql');
+                },
+                Flash::class => function() {
+                    return new Flash;
+                }
             ]
         );
         $container = $containerBuilder->build();
-
 
         $routeInfo = self::$dispatcher->dispatch($httpMethod, $uri);
         switch ($routeInfo[0]) {
@@ -91,14 +90,10 @@ Class Router
                 echo 405;
                 break;
             case FastRoute\Dispatcher::FOUND:
-                //if (isset($routeInfo[1][2])) {
-                //    $vars = $routeInfo[1][2];
-                //    unset($routeInfo[1][2]);
-                //} else {
-                    $vars = $routeInfo[2];
-                //}
+                $vars = $routeInfo[2];
+                //preg_match("#^/(\w+)#", $uri, $matches);
+                //$vars['page']=$matches[1];
                 $handler = $routeInfo[1];
-                d($routeInfo,$handler, $vars, $uri);die();
                 $container->call($handler, [$vars]);
                 break;
         }

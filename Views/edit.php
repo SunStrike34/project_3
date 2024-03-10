@@ -1,12 +1,13 @@
-<?php include '../Views/templates/header.php' ?>
+<?php include '../Views/templates/header.php'?>
     <main id="js-page-content" role="main" class="page-content mt-3">
+        <?= $output = \Tamtamchik\SimpleFlash\flash()->display()?>
         <div class="subheader">
             <h1 class="subheader-title">
                 <i class='subheader-icon fal fa-plus-circle'></i> Редактировать
             </h1>
 
         </div>
-        <form action="">
+        <form action="" method="post">
             <div class="row">
                 <div class="col-xl-6">
                     <div id="panel-1" class="panel">
@@ -18,25 +19,25 @@
                                 <!-- username -->
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Имя</label>
-                                    <input type="text" id="simpleinput" class="form-control" value="Иван иванов">
+                                    <input type="text" id="username" name="username" class="form-control" value="<?=$this->data['user']->username?>">
                                 </div>
 
                                 <!-- title -->
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Место работы</label>
-                                    <input type="text" id="simpleinput" class="form-control" value="Marlin Веб-разработчик">
+                                    <input type="text" id="job_title" name="job_title" class="form-control" value="<?=$this->data['user']->job_title?>">
                                 </div>
 
                                 <!-- tel -->
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Номер телефона</label>
-                                    <input type="text" id="simpleinput" class="form-control" value="8 888 8888 88">
+                                    <input type="text" id="phone" name="phone" class="form-control" value="<?=$this->data['user']->phone?>">
                                 </div>
 
                                 <!-- address -->
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Адрес</label>
-                                    <input type="text" id="simpleinput" class="form-control" value="Восточные Королевства, Штормград">
+                                    <input type="text" id="address" name="address" class="form-control" value="<?=$this->data['user']->address?>">
                                 </div>
                                 <div class="col-md-12 mt-3 d-flex flex-row-reverse">
                                     <button class="btn btn-warning">Редактировать</button>

@@ -73,6 +73,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'fakerphp/faker' => array(
+            'pretty_version' => 'v1.23.1',
+            'version' => '1.23.1.0',
+            'reference' => 'bfb4fe148adbf78eff521199619b93a52ae3554b',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../fakerphp/faker',
+            'aliases' => array(),
+            'dev_requirement' => true,
+        ),
         'kint-php/kint' => array(
             'pretty_version' => '5.1.0',
             'version' => '5.1.0.0',
@@ -141,6 +150,15 @@
             'provided' => array(
                 0 => '^1.0',
             ),
+        ),
+        'symfony/deprecation-contracts' => array(
+            'pretty_version' => 'v3.4.0',
+            'version' => '3.4.0.0',
+            'reference' => '7c3aff79d10325257a001fcf92d991f24fc967cf',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../symfony/deprecation-contracts',
+            'aliases' => array(),
+            'dev_requirement' => true,
         ),
         'tamtamchik/simple-flash' => array(
             'pretty_version' => '3.0.0',

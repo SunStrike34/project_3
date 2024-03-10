@@ -13,14 +13,8 @@ Class RenderController
         $this->templates = $templates;
     }
 
-    public static function redirect(string $pass): void
+    public function getPage(string $page, $params = []): void
     {
-        header("Location: " . $pass);
-        exit();
-    }
-
-    public function getPage(array $pass): void
-    {
-        echo $this->templates->render("{$pass[0]}");
+        echo $this->templates->render("{$page}", $params);
     }
 }

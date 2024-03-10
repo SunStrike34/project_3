@@ -15,5 +15,8 @@
             "Router\\": "Router/",
             "Views\\": "views/"
         }
+    },
+    "require-dev": {
+        "fakerphp/faker": "^1.23"
     }
 }

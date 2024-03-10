@@ -1,12 +1,12 @@
 <?php include '../Views/templates/header.php' ?>
     <main id="js-page-content" role="main" class="page-content mt-3">
+        <?= $output = \Tamtamchik\SimpleFlash\flash()->display()?>
         <div class="subheader">
             <h1 class="subheader-title">
                 <i class='subheader-icon fal fa-lock'></i> Безопасность
             </h1>
-
         </div>
-        <form action="">
+        <form action="" method="post">
             <div class="row">
                 <div class="col-xl-6">
                     <div id="panel-1" class="panel">
@@ -18,19 +18,19 @@
                                 <!-- email -->
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Email</label>
-                                    <input type="text" id="simpleinput" class="form-control" value="john@example.com">
+                                    <input type="text" id="email" name="email" class="form-control" value="<?=$this->data['user']->email?>">
                                 </div>
 
                                 <!-- password -->
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Пароль</label>
-                                    <input type="password" id="simpleinput" class="form-control">
+                                    <input type="password" id="password" name="password" class="form-control">
                                 </div>
 
                                 <!-- password confirmation-->
                                 <div class="form-group">
                                     <label class="form-label" for="simpleinput">Подтверждение пароля</label>
-                                    <input type="password" id="simpleinput" class="form-control">
+                                    <input type="password" id="password_confirmation" name="password_confirmation"  class="form-control">
                                 </div>
 
 

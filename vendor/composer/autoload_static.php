@@ -7,6 +7,7 @@ namespace Composer\Autoload;
 class ComposerStaticInit858d535e8fbe173918bb14e0c2a5a8f0
 {
     public static $files = array (
+        '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
         '3917c79c5052b270641b5a200963dbc2' => __DIR__ . '/..' . '/kint-php/kint/init.php',
         '253c157292f75eb38082b5acb06f3f01' => __DIR__ . '/..' . '/nikic/fast-route/src/functions.php',
         'b33e3d135e5d9e47d845c576147bda89' => __DIR__ . '/..' . '/php-di/php-di/src/functions.php',
@@ -46,6 +47,7 @@ class ComposerStaticInit858d535e8fbe173918bb14e0c2a5a8f0
         'F' => 
         array (
             'FastRoute\\' => 10,
+            'Faker\\' => 6,
         ),
         'D' => 
         array (
@@ -99,6 +101,10 @@ class ComposerStaticInit858d535e8fbe173918bb14e0c2a5a8f0
         'FastRoute\\' => 
         array (
             0 => __DIR__ . '/..' . '/nikic/fast-route/src',
+        ),
+        'Faker\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/fakerphp/faker/src/Faker',
         ),
         'Delight\\Http\\' => 
         array (

@@ -15,6 +15,7 @@ return array(
     'Kint\\' => array($vendorDir . '/kint-php/kint/src'),
     'Invoker\\' => array($vendorDir . '/php-di/invoker/src'),
     'FastRoute\\' => array($vendorDir . '/nikic/fast-route/src'),
+    'Faker\\' => array($vendorDir . '/fakerphp/faker/src/Faker'),
     'Delight\\Http\\' => array($vendorDir . '/delight-im/http/src'),
     'Delight\\Db\\' => array($vendorDir . '/delight-im/db/src'),
     'Delight\\Cookie\\' => array($vendorDir . '/delight-im/cookie/src'),

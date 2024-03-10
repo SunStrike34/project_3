@@ -3,16 +3,19 @@
     <div class="collapse navbar-collapse" id="navbarColor02">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="users">Главная <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/users">Главная <span class="sr-only">(current)</span></a>
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
+            <?php if (!$_SESSION['auth_logged_in']) {?>
+                <li class="nav-item">
+                    <a class="nav-link" href="/login">Войти</a>
+                </li>
+            <?php } else { ?>
             <li class="nav-item">
-                <a class="nav-link" href="login">Войти</a>
+                <a class="nav-link" href="/logout">Выйти</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="logout">Выйти</a>
-            </li>
+            <?php }?>
         </ul>
     </div>
 </nav>

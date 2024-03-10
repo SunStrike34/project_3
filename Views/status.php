@@ -1,12 +1,13 @@
 <?php include '../Views/templates/header.php' ?>
     <main id="js-page-content" role="main" class="page-content mt-3">
+        <?= $output = \Tamtamchik\SimpleFlash\flash()->display()?>
         <div class="subheader">
             <h1 class="subheader-title">
                 <i class='subheader-icon fal fa-sun'></i> Установить статус
             </h1>
 
         </div>
-        <form action="">
+        <form action="" method="post">
             <div class="row">
                 <div class="col-xl-6">
                     <div id="panel-1" class="panel">
@@ -20,10 +21,10 @@
                                         <!-- status -->
                                         <div class="form-group">
                                             <label class="form-label" for="example-select">Выберите статус</label>
-                                            <select class="form-control" id="example-select">
-                                                <option>Онлайн</option>
-                                                <option>Отошел</option>
-                                                <option>Не беспокоить</option>
+                                            <select class="form-control" id="user_status" name="user_status">
+                                                <option value="success">Онлайн</option>
+                                                <option value="warning">Отошел</option>
+                                                <option value="danger">Не беспокоить</option>
                                             </select>
                                         </div>
                                     </div>

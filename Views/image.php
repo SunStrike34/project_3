@@ -1,12 +1,13 @@
 <?php include '../Views/templates/header.php' ?>
     <main id="js-page-content" role="main" class="page-content mt-3">
+        <?= $output = \Tamtamchik\SimpleFlash\flash()->display()?>
         <div class="subheader">
             <h1 class="subheader-title">
                 <i class='subheader-icon fal fa-image'></i> Загрузить аватар
             </h1>
 
         </div>
-        <form action="">
+        <form action="" method="post" enctype="multipart/form-data">
             <div class="row">
                 <div class="col-xl-6">
                     <div id="panel-1" class="panel">
@@ -16,12 +17,13 @@
                             </div>
                             <div class="panel-content">
                                 <div class="form-group">
-                                    <img src="img/demo/authors/josh.png" alt="" class="img-responsive" width="200">
+                                    <img src="<?=(!is_null($this->data['user']->image_id))? $this->data['user']->href.$this->data['user']->name.'.'.$this->data['user']->format 
+                                    : '../public/img/defoltImage.jpg'?>" alt="" class="img-responsive" width="200">
                                 </div>
 
                                 <div class="form-group">
                                     <label class="form-label" for="example-fileinput">Выберите аватар</label>
-                                    <input type="file" id="example-fileinput" class="form-control-file">
+                                    <input type="file" id="image" name="image" class="form-control-file">
                                 </div>
 
 
